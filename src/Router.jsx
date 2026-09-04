@@ -6,7 +6,11 @@ import { createBrowserRouter } from 'react-router'
 // import Contact from './reactrouter/Contact'
 import NotFound from './reactrouter/NotFound'
 // import ProfileDetail from './reactrouter/ProfileDetail'
-import { DashboardSantri, DaftarSantri, DetailSantri } from './reactrouter/Tugas-08'
+import { DashboardSantri, DaftarSantri, DetailSantri, AboutPondok } from './reactrouter/Tugas-08'
+
+
+
+
 
 const router = createBrowserRouter([
 
@@ -22,6 +26,11 @@ const router = createBrowserRouter([
         path: '/santri/:id',
         element: <DetailSantri />,
     },
+    {
+        path: '/about',
+        element: <AboutPondok />,
+    },
+    
     // {
     //     path: '/home',
     //     element: <Home />,

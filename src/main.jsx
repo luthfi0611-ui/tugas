@@ -2,14 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 // import App from './App.jsx'
-import { RouterProvider } from 'react-router'
-import router from './Router.jsx'
+import AppUseContext from './AppUseContext'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <App /> */}
-
-      <RouterProvider router={router} />
-
+    <AppUseContext />
   </StrictMode>,
 )
+
+// tolong jangan langsung membuat routerprovider tetapi menggunakan app.jsx 
+

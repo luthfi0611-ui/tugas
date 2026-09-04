@@ -1,10 +1,12 @@
-import React from 'react'
+import ProfileDetail from './ProfileDetail.jsx'
 
 function Profile() {
   return (
-    <div>
-      halo
-    </div>
+    <>
+      <div>ini profile</div>
+
+      <ProfileDetail />
+    </>
   )
 }
 

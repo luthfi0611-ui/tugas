@@ -11,12 +11,22 @@ import React from 'react'
 // import Tugas05 from './tugas/Tugas-05.jsx'
 // import Dropdown from './StyleComponent/Dropdown.jsx'
 // import Coba from './usestate/Coba.jsx'
-import Tugas from './tugas/Tugas-07.jsx'
+// import Tugas from './tugas/Tugas-07.jsx'
+// import { RouterProvider } from 'react-router'
+// import router from './Router.jsx'
+import Home from './learnUseContext/Home.jsx'
+
 
 function App() {
   return (
-    <div>
-      <Tugas/>
+    <>
+    
+      <Home />
+      
+      
+      
+      {/* <RouterProvider router={router} /> */}
+      {/* <Tugas/> */}
       {/* <Coba /> */}
       {/* <Dropdown /> */}
       {/* <Form /> */}
@@ -29,7 +39,7 @@ function App() {
       {/* <Basic/> */}
       {/* <LoginFormWithUseReff/> */}
       {/* <Tugas05/> */}
-    </div>
+    </>
   )
 }
 
