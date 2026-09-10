@@ -14,14 +14,36 @@ import React from 'react'
 // import Tugas from './tugas/Tugas-07.jsx'
 // import { RouterProvider } from 'react-router'
 // import router from './Router.jsx'
-import Home from './learnUseContext/Home.jsx'
+// import Home from './learnUseContext/Home.jsx'
+// import {Button, buttonVariants} from './components/ui/button.jsx'
+// import { ArrowUpIcon } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import {
+//   Sidebar,
+//   SidebarContent,
+//   SidebarProvider,
+// } from "@/components/ui/sidebar"
+import ExampleOne from './learnUseReducer/ExampleOne.jsx'
+import ExampleTwo from './learnUseReducer/ExampleTwo.jsx'
 
-
-function App() {
+export function App() {
   return (
     <>
-    
-      <Home />
+      <ExampleOne />
+
+
+      {/* <SidebarProvider>
+      <Sidebar>
+        <SidebarContent>
+          <p>Menu Sidebar</p>
+
+          <Button>
+            Klik Gue
+          </Button>
+        </SidebarContent>
+      </Sidebar>
+    </SidebarProvider> */}
+      {/* <Home /> */}
       
       
       

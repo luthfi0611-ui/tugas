@@ -1,15 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+// import { RouterProvider } from 'react-router'
+// import { router } from './Router'
+// import { TooltipProvider } from './components/ui/tooltip' // Import ini
 import './index.css'
-// import App from './App.jsx'
-import AppUseContext from './AppUseContext'
+import App from './App.jsx'
 
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AppUseContext />
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+    {/* <TooltipProvider>
+      <RouterProvider router={router} />
+    </TooltipProvider> */}
+  </React.StrictMode>
 )
-
-// tolong jangan langsung membuat routerprovider tetapi menggunakan app.jsx 
-

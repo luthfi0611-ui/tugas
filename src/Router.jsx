@@ -1,62 +1,59 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router'
-// import Profile from './reactrouter/Profile'
-// import Home from './reactrouter/Home'
-// import About from './reactrouter/About'
-// import Contact from './reactrouter/Contact'
-import NotFound from './reactrouter/NotFound'
-// import ProfileDetail from './reactrouter/ProfileDetail'
-import { DashboardSantri, DaftarSantri, DetailSantri, AboutPondok } from './reactrouter/Tugas-08'
+import SantriDetail from "./santri/SantriDetail.jsx"
 
+import AppLayout from '@/layout/Applayout.jsx'
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import Santri from './pages/Santri.jsx'
+import SantriLayout from './layout/SantriLayout.jsx'
+import SantriList from './santri/SantriList.jsx'
+import SantriNilai from './santri/SantriNilai.jsx'
+import SantriAbsensi from './santri/SantriAbsensi.jsx'
+import SantriTambah from './santri/SantriTambah.jsx'
 
-
-
-
-const router = createBrowserRouter([
-
-    {
-        path: '/',
-        element: <DashboardSantri />,
-    },
-    {
-        path: '/santri',
-        element: <DaftarSantri />,
-    },
-    {
-        path: '/santri/:id',
-        element: <DetailSantri />,
-    },
-    {
-        path: '/about',
-        element: <AboutPondok />,
-    },
-    
-    // {
-    //     path: '/home',
-    //     element: <Home />,
-    // },
-    // {
-    //     path: '/profile',
-    //     element: <Profile />,
-    // },
-    // {
-    //     path: '/about',
-    //     element: <About />,
-    // },
-    // {
-    //     path: '/contact',
-    //     element: <Contact />,
-    // },
-    {
-        path: '*',
-        element: <NotFound />,
-    },
-    // {
-    //     path: '/profile/:id',
-    //     element: <ProfileDetail />,
-    // },
-    
-
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: 'about',
+        element: <About />,
+      },
+      {
+        path: 'santri',
+        element: <SantriLayout />,
+        children: [
+            {
+                index: true,
+                element: <SantriList />,
+            },
+            {
+                path: "nilai",
+                element: <SantriNilai />,
+            },
+            {
+                path: 'tambah',
+                element: <SantriTambah />,
+            },
+            {
+                path: "absensi",
+                element: <SantriAbsensi />,
+            },
+            {
+                 path: "list/:santri_id",
+                element: <SantriDetail /> 
+            },
+        ]
+      },
+    ],
+  },
+  
 ])
 
 export default router
