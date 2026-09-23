@@ -13,6 +13,7 @@ import SantriLayout from "./layout/SantriLayout";
 import DashboardUser from "./learnZustand/DashboardUser";
 // Impor file ProtectedRoute yang baru dibuat
 import ProtectedRoute from "./components/ProtectedRoute"; 
+import PublicRoute from "./components/PublicRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,12 +21,17 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/signin",
-    element: <SignIn />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+    ],
   },
 
   // PROTEKSI ROUTE ADMIN
@@ -36,10 +42,6 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <SantriLayout />,
         children: [
-          {
-            index: true,
-            element: <AppLayout />,
-          },
           {
             path: "about",
             element: <About />,
