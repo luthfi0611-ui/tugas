@@ -1,59 +1,74 @@
-import React from 'react'
-import { createBrowserRouter } from 'react-router'
-import SantriDetail from "./santri/SantriDetail.jsx"
+import { createBrowserRouter } from "react-router";
 
-import AppLayout from '@/layout/Applayout.jsx'
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Santri from './pages/Santri.jsx'
-import SantriLayout from './layout/SantriLayout.jsx'
-import SantriList from './santri/SantriList.jsx'
-import SantriNilai from './santri/SantriNilai.jsx'
-import SantriAbsensi from './santri/SantriAbsensi.jsx'
-import SantriTambah from './santri/SantriTambah.jsx'
+import AppLayout from "./layout/AppLayout";
+import UserLayout from "./layout/UserLayout";
 
-export const router = createBrowserRouter([
+import Home from "./pages/Home";
+import About from "./pages/admin/About";
+import Santri from "./pages/admin/Santri";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import SantriLayout from "./layout/SantriLayout";
+
+import DashboardUser from "./learnZustand/DashboardUser";
+// Impor file ProtectedRoute yang baru dibuat
+import ProtectedRoute from "./components/ProtectedRoute"; 
+
+const router = createBrowserRouter([
   {
-    path: '/',
-    element: <AppLayout />,
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+
+  // PROTEKSI ROUTE ADMIN
+  {
+    element: <ProtectedRoute allowedRoles={["admin"]} />,
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: 'about',
-        element: <About />,
-      },
-      {
-        path: 'santri',
+        path: "/admin",
         element: <SantriLayout />,
         children: [
-            {
-                index: true,
-                element: <SantriList />,
-            },
-            {
-                path: "nilai",
-                element: <SantriNilai />,
-            },
-            {
-                path: 'tambah',
-                element: <SantriTambah />,
-            },
-            {
-                path: "absensi",
-                element: <SantriAbsensi />,
-            },
-            {
-                 path: "list/:santri_id",
-                element: <SantriDetail /> 
-            },
-        ]
+          {
+            index: true,
+            element: <AppLayout />,
+          },
+          {
+            path: "about",
+            element: <About />,
+          },
+          {
+            path: "santri",
+            element: <Santri />,
+          },
+        ],
       },
     ],
   },
-  
-])
 
-export default router
+  // PROTEKSI ROUTE USER
+  {
+    element: <ProtectedRoute allowedRoles={["user"]} />,
+    children: [
+      {
+        path: "/user",
+        element: <UserLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardUser />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+export default router;

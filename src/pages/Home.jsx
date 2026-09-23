@@ -1,401 +1,177 @@
-import React from 'react'
 import { Link } from 'react-router'
 
 function Home() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-slate-950 text-white selection:bg-indigo-500 selection:text-white">
+      
+      {/* 1. NAVBAR */}
+      <nav className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+            MyBrand<span className="text-indigo-500">.</span>
+          </Link>
 
-      {/* Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl" />
-        <div className="absolute top-1/2 -left-40 h-96 w-96 rounded-full bg-purple-600/10 blur-3xl" />
-      </div>
-
-      <div className="mx-auto max-w-7xl">
-
-        {/* Header */}
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-medium text-indigo-400">
-              Dashboard
-            </p>
-
-            <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
-              Selamat Datang 👋
-            </h1>
-
-            <p className="mt-1 text-sm text-slate-400">
-              Pantau dan kelola data santri dengan mudah.
-            </p>
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center gap-8 text-sm text-slate-400 font-medium">
+            <a href="#features" className="hover:text-white transition-colors">Features</a>
+            <a href="#solutions" className="hover:text-white transition-colors">Solutions</a>
+            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
           </div>
 
-          <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-xl">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/20 text-indigo-400">
-              📅
-            </div>
-
-            <div>
-              <p className="text-xs text-slate-400">
-                Hari ini
-              </p>
-
-              <p className="text-sm font-semibold">
-                Senin, 09 September
-              </p>
-            </div>
+          {/* Auth Buttons */}
+          <div className="flex items-center gap-4">
+            <Link
+              to="/signin"
+              className="text-sm text-slate-300 hover:text-white font-medium px-4 py-2 transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/signup"
+              className="text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50"
+            >
+              Get Started
+            </Link>
           </div>
         </div>
+      </nav>
 
-        {/* Hero */}
-        <section className="relative mb-8 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 p-6 shadow-2xl shadow-indigo-950/40 sm:p-10">
+      {/* HERO SECTION */}
+      <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        {/* Background Glow Effect */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-          {/* Decorative */}
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute -bottom-24 right-20 h-72 w-72 rounded-full bg-purple-300/10 blur-3xl" />
-
-          <div className="relative z-10 max-w-2xl">
-
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold backdrop-blur-md">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              Sistem Aktif
-            </div>
-
-            <h2 className="text-3xl font-black leading-tight tracking-tight sm:text-5xl">
-              Kelola Data Santri
-              <span className="block text-indigo-100">
-                Lebih Mudah & Terstruktur.
-              </span>
-            </h2>
-
-            <p className="mt-5 max-w-xl text-sm leading-6 text-indigo-100 sm:text-base">
-              Satu dashboard untuk mengelola data santri, nilai,
-              absensi, dan berbagai informasi akademik secara
-              cepat dan terorganisir.
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-3">
-
-              <Link
-                to="/santri/list"
-                className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-600 shadow-lg transition hover:-translate-y-0.5 hover:bg-indigo-50 active:scale-95"
-              >
-                Lihat Data Santri →
-              </Link>
-
-              <Link
-                to="/santri"
-                className="rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold backdrop-blur-md transition hover:bg-white/20"
-              >
-                Jelajahi Dashboard
-              </Link>
-
-            </div>
-          </div>
-        </section>
-
-        {/* Stats */}
-        <section className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-          <div className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-white/[0.07]">
-            <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/15 text-xl">
-                👨‍🎓
-              </div>
-
-              <span className="text-xs font-semibold text-emerald-400">
-                +12%
-              </span>
-            </div>
-
-            <p className="mt-5 text-sm text-slate-400">
-              Total Santri
-            </p>
-
-            <h3 className="mt-1 text-3xl font-black">
-              128
-            </h3>
-
-            <p className="mt-2 text-xs text-slate-500">
-              dibanding bulan lalu
-            </p>
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs text-indigo-400 mb-8">
+            <span className="flex h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
+            Version 2.0 is officially live!
           </div>
 
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.15]">
+            Build faster with our <br />
+            <span className="bg-gradient-to-r from-indigo-400 via-sky-400 to-indigo-500 bg-clip-text text-transparent">
+              Modern Platform
+            </span>
+          </h1>
 
-          <div className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-white/[0.07]">
-            <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/15 text-xl">
-                ✓
-              </div>
-
-              <span className="text-xs font-semibold text-emerald-400">
-                Baik
-              </span>
-            </div>
-
-            <p className="mt-5 text-sm text-slate-400">
-              Kehadiran
-            </p>
-
-            <h3 className="mt-1 text-3xl font-black">
-              96%
-            </h3>
-
-            <p className="mt-2 text-xs text-slate-500">
-              123 santri hadir hari ini
-            </p>
-          </div>
-
-
-          <div className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:bg-white/[0.07]">
-            <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-500/15 text-xl">
-                ⭐
-              </div>
-
-              <span className="text-xs font-semibold text-purple-400">
-                A
-              </span>
-            </div>
-
-            <p className="mt-5 text-sm text-slate-400">
-              Rata-rata Nilai
-            </p>
-
-            <h3 className="mt-1 text-3xl font-black">
-              88.5
-            </h3>
-
-            <p className="mt-2 text-xs text-slate-500">
-              Predikat sangat baik
-            </p>
-          </div>
-
-
-          <div className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:bg-white/[0.07]">
-            <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/15 text-xl">
-                📋
-              </div>
-
-              <span className="text-xs font-semibold text-orange-400">
-                Aktif
-              </span>
-            </div>
-
-            <p className="mt-5 text-sm text-slate-400">
-              Data Terdaftar
-            </p>
-
-            <h3 className="mt-1 text-3xl font-black">
-              128
-            </h3>
-
-            <p className="mt-2 text-xs text-slate-500">
-              data santri aktif
-            </p>
-          </div>
-
-        </section>
-
-
-        {/* Bottom Content */}
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-
-          {/* Quick Actions */}
-          <div className="lg:col-span-2 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-
-            <div className="mb-6">
-              <h2 className="text-lg font-bold">
-                Akses Cepat
-              </h2>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Beberapa fitur yang sering digunakan.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-
-              <Link
-                to="/santri/list"
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-indigo-500/40 hover:bg-indigo-500/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/15 text-xl">
-                    👨‍🎓
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold">
-                      Data Santri
-                    </h3>
-
-                    <p className="mt-1 text-xs text-slate-500">
-                      Lihat semua data santri
-                    </p>
-                  </div>
-
-                  <span className="ml-auto text-slate-500 transition group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-
-
-              <Link
-                to="/santri/nilai"
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-purple-500/40 hover:bg-purple-500/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/15 text-xl">
-                    📊
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold">
-                      Nilai Santri
-                    </h3>
-
-                    <p className="mt-1 text-xs text-slate-500">
-                      Lihat data nilai
-                    </p>
-                  </div>
-
-                  <span className="ml-auto text-slate-500 transition group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-
-
-              <Link
-                to="/santri/absensi"
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-emerald-500/40 hover:bg-emerald-500/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 text-xl">
-                    ✓
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold">
-                      Absensi
-                    </h3>
-
-                    <p className="mt-1 text-xs text-slate-500">
-                      Kelola kehadiran santri
-                    </p>
-                  </div>
-
-                  <span className="ml-auto text-slate-500 transition group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-
-
-              <Link
-                to="/about"
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-orange-500/40 hover:bg-orange-500/5"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/15 text-xl">
-                    ℹ️
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold">
-                      Informasi
-                    </h3>
-
-                    <p className="mt-1 text-xs text-slate-500">
-                      Tentang sistem
-                    </p>
-                  </div>
-
-                  <span className="ml-auto text-slate-500 transition group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-
-            </div>
-          </div>
-
-
-          {/* Activity */}
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-
-            <div className="mb-6">
-              <h2 className="text-lg font-bold">
-                Aktivitas Terbaru
-              </h2>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Aktivitas sistem hari ini.
-              </p>
-            </div>
-
-            <div className="space-y-5">
-
-              <div className="flex gap-3">
-                <div className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-400" />
-
-                <div>
-                  <p className="text-sm font-medium">
-                    Data santri diperbarui
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-500">
-                    5 menit yang lalu
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="mt-1 h-2.5 w-2.5 rounded-full bg-indigo-400" />
-
-                <div>
-                  <p className="text-sm font-medium">
-                    Absensi hari ini selesai
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-500">
-                    20 menit yang lalu
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="mt-1 h-2.5 w-2.5 rounded-full bg-purple-400" />
-
-                <div>
-                  <p className="text-sm font-medium">
-                    Nilai berhasil diperbarui
-                  </p>
-
-                  <p className="mt-1 text-xs text-slate-500">
-                    1 jam yang lalu
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* Footer */}
-        <div className="mt-8 border-t border-white/10 pt-5 text-center">
-          <p className="text-xs text-slate-600">
-            Sistem Informasi Santri • Dashboard Management
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            The all-in-one developer workspace to build, scale, and manage your applications effortlessly with unmatched performance.
           </p>
-        </div>
 
-      </div>
+          {/* CTA Group */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <Link
+              to="/signup"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02]"
+            >
+              Start Free Trial
+            </Link>
+            <a
+              href="#features"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold transition-all"
+            >
+              Explore Features
+            </a>
+          </div>
+
+          {/* Product Preview Mockup */}
+          <div className="relative mx-auto max-w-4xl rounded-2xl border border-slate-800 bg-slate-900/60 p-2 backdrop-blur-xl shadow-2xl shadow-indigo-950/50">
+            <div className="rounded-xl border border-slate-800/80 bg-slate-950 p-6 text-left">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+              </div>
+              <pre className="text-xs sm:text-sm font-mono text-slate-300 overflow-x-auto">
+                <code>
+                  <span className="text-purple-400">const</span> app = <span className="text-blue-400">createApp</span>();{"\n"}
+                  app.<span className="text-blue-400">use</span>(authPlugin);{"\n"}
+                  app.<span className="text-blue-400">listen</span>(3000, () =&gt; &#123;{"\n"}
+                  &nbsp;&nbsp;console.<span className="text-blue-400">log</span>(<span className="text-emerald-400">'🚀 Server running on port 3000'</span>);{"\n"}
+                  &#125;);
+                </code>
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES SECTION */}
+      <section id="features" className="py-20 border-t border-slate-800/60 bg-slate-950">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold mb-4">Everything you need to scale</h2>
+            <p className="text-slate-400">
+              Powerful tools and infrastructure designed to help developers build better apps in less time.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-7 hover:border-slate-700 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl mb-5">
+                ⚡
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Optimized for extreme speed and low latency, giving your users a seamless experience.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-7 hover:border-slate-700 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl mb-5">
+                🔒
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Secure by Default</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Enterprise-grade security built directly into the core, protecting your data 24/7.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-7 hover:border-slate-700 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl mb-5">
+                📊
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Real-time Analytics</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Monitor performance, track metrics, and gather deep insights in real time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA BANNER */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto bg-gradient-to-r from-indigo-900/40 via-slate-900 to-indigo-900/40 border border-indigo-500/30 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Ready to get started?
+          </h2>
+          <p className="text-slate-400 max-w-xl mx-auto mb-8">
+            Join thousands of developers and teams already building the future with our platform.
+          </p>
+          <Link
+            to="/signup"
+            className="inline-block px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition-all hover:scale-105"
+          >
+            Create Your Account
+          </Link>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-slate-800 py-10 text-center text-sm text-slate-500">
+        <p>&copy; {new Date().getFullYear()} MyBrand, Inc. All rights reserved.</p>
+      </footer>
+
     </div>
   )
 }
 
-export default Home
+export default Home  

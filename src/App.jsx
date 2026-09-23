@@ -23,16 +23,19 @@ import React from 'react'
 //   SidebarContent,
 //   SidebarProvider,
 // } from "@/components/ui/sidebar"
-import ExampleOne from './learnUseReducer/ExampleOne.jsx'
-import ExampleTwo from './learnUseReducer/ExampleTwo.jsx'
+// // import ExampleOne from './learnUseReducer/ExampleOne.jsx'
+// // import ExampleTwo from './learnUseReducer/ExampleTwo.jsx'
+import DashboardUser from './learnZustand/DashboardUser'
+
 
 export function App() {
   return (
     <>
-      <ExampleOne />
+      <DashboardUser />
+      {/* <ExampleOne /> */}
 
-
-      {/* <SidebarProvider>
+{/* 
+      <SidebarProvider>
       <Sidebar>
         <SidebarContent>
           <p>Menu Sidebar</p>
@@ -42,12 +45,12 @@ export function App() {
           </Button>
         </SidebarContent>
       </Sidebar>
-    </SidebarProvider> */}
+    </SidebarProvider>  */}
       {/* <Home /> */}
       
       
       
-      {/* <RouterProvider router={router} /> */}
+      {/* <RouterProvider router={router} />
       {/* <Tugas/> */}
       {/* <Coba /> */}
       {/* <Dropdown /> */}
@@ -61,6 +64,7 @@ export function App() {
       {/* <Basic/> */}
       {/* <LoginFormWithUseReff/> */}
       {/* <Tugas05/> */}
+
     </>
   )
 }

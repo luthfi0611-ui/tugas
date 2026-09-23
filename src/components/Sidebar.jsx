@@ -22,18 +22,18 @@ import {
 
 const navItems = [
   {
-    to: '/',
+    to: '/admin',
     label: 'Dashboard',
     icon: Home,
     end: true,
   },
   {
-    to: '/santri',
+    to: '/admin/santri',
     label: 'Santri',
     icon: Users,
   },
   {
-    to: '/about',
+    to: '/admin/about',
     label: 'About',
     icon: Info,
   },

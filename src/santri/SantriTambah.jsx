@@ -10,7 +10,7 @@ function SantriTambah() {
         <div className="mb-8">
 
           <Link
-            to="/santri"
+            to="/admin/santri"
             className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-indigo-400 transition mb-5"
           >
             ← Kembali ke daftar santri
@@ -93,7 +93,7 @@ function SantriTambah() {
             <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-white/10 pt-6">
 
               <Link
-                to="/santri"
+                to="/admin/santri"
                 className="rounded-xl border border-white/10 px-5 py-3 text-center text-sm font-semibold text-slate-400 transition hover:bg-white/5 hover:text-white"
               >
                 Batal
