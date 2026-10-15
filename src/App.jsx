@@ -25,13 +25,18 @@ import React from 'react'
 // } from "@/components/ui/sidebar"
 // // import ExampleOne from './learnUseReducer/ExampleOne.jsx'
 // // import ExampleTwo from './learnUseReducer/ExampleTwo.jsx'
-import DashboardUser from './learnZustand/DashboardUser'
+// import DashboardUser from './learnZustand/DashboardUser'
+// import DashboardUser from './learnReactHookForm/DashboardUser'
+import RegisterForm from './learnReactHookForm/RegisterForm.jsx'
 
 
 export function App() {
   return (
     <>
-      <DashboardUser />
+
+      {/* <DashboardUser /> */}
+      <RegisterForm />
+
       {/* <ExampleOne /> */}
 
 {/* 
