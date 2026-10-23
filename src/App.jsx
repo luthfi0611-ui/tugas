@@ -27,16 +27,25 @@ import React from 'react'
 // // import ExampleTwo from './learnUseReducer/ExampleTwo.jsx'
 // import DashboardUser from './learnZustand/DashboardUser'
 // import DashboardUser from './learnReactHookForm/DashboardUser'
-import RegisterForm from './learnReactHookForm/RegisterForm.jsx'
-
+// import RegisterForm from './learnReactHookForm/RegisterForm.jsx'
+// import Framer from './learnFramerMotion/Framer.jsx'
+// import AnimateButton from './learnFramerMotion/AnimateButton.jsx'
+// import DraggableCard from './learnFramerMotion/DraggableCard.jsx'
+// import Alert from './learnFramerMotion/Alert.jsx'
+// import Step from './learnFramerMotion/Step.jsx'
+import CollapsibleList from './learnFramerMotion/CollapsibleList.jsx'
 
 export function App() {
   return (
     <>
-
+      {/* <Framer /> */}
+      {/* <Alert /> */}
+      {/* <AnimateButton /> */}
+      {/* <DraggableCard /> */}
       {/* <DashboardUser /> */}
-      <RegisterForm />
-
+      {/* <RegisterForm /> */}
+      {/* <Step /> */}
+      <CollapsibleList />
       {/* <ExampleOne /> */}
 
 {/* 

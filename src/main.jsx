@@ -8,14 +8,17 @@ import { TooltipProvider } from "./components/ui/tooltip";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    
    <TooltipProvider>
-      <RouterProvider router={router} />
+       <RouterProvider router={router} />
     </TooltipProvider>
- 
   </React.StrictMode>
 )
 
 
 
 
-  //  <App/> <App/>
+ 
+
+  // <App/> 
+ 

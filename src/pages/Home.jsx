@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   Zap,
   Shield,
@@ -32,6 +33,22 @@ import {
   X,
   Menu,
 } from 'lucide-react'
+
+const sectionReveal = {
+  hidden: { opacity: 0, y: 70, scale: 0.965, filter: 'blur(14px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+const cardReveal = {
+  hidden: { opacity: 0, y: 55, scale: 0.9, rotateX: 10, filter: 'blur(8px)' },
+  visible: { opacity: 1, y: 0, scale: 1, rotateX: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+}
 
 export default function Home() {
   // ================= 1. STATE MANAGEMENT =================
@@ -217,17 +234,47 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.65, ease: "easeOut" }}
+      className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white relative overflow-x-hidden"
+    >
 
       {/* ================= BACKGROUND AMBIANCE LIGHTS ================= */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]" />
-        <div className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[140px]" />
-        <div className="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[140px]" />
+        <motion.div
+          animate={{ x: [0, 28, -12, 0], y: [0, -20, 14, 0], scale: [1, 1.1, 0.96, 1] }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"
+        />
+        <motion.div
+          animate={{ x: [0, -24, 18, 0], y: [0, 22, -14, 0], scale: [1, 0.94, 1.08, 1] }}
+          transition={{ duration: 19, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[140px]"
+        />
+        <motion.div
+          animate={{ x: [0, 18, -20, 0], y: [0, -16, 20, 0] }}
+          transition={{ duration: 21, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[140px]"
+        />
       </div>
 
-      {/* ================= 1. NAVIGATION BAR ================= */}
-      <nav className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 transition-all">
+      <motion.div
+        aria-hidden="true"
+        className="fixed left-0 top-0 z-[100] h-1 origin-left w-full bg-gradient-to-r from-indigo-500 via-sky-400 to-cyan-300"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: [0, 0.18, 0.42, 0.72, 1] }}
+        transition={{ duration: 1.6, ease: "easeInOut" }}
+      />
+
+            {/* ================= 1. NAVIGATION BAR ================= */}
+      <motion.nav
+        initial={{ y: -90, opacity: 0, filter: 'blur(8px)' }}
+        animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 transition-all"
+      >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           
           {/* Brand Logo */}
@@ -304,37 +351,84 @@ export default function Home() {
             </div>
           </div>
         )}
-      </nav>
+      </motion.nav>
 
       {/* ================= 2. HERO SECTION ================= */}
-      <section className="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden z-10">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        animate="visible"
+        className="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden z-10">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <motion.div
+            animate={{ y: [0, -22, 0], x: [0, 12, 0], rotate: [0, 90, 180] }}
+            transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-24 left-[8%] h-3 w-3 rounded-full bg-indigo-400/70 shadow-[0_0_30px_rgba(129,140,248,0.9)]"
+          />
+          <motion.div
+            animate={{ y: [0, 25, 0], x: [0, -16, 0], scale: [1, 1.5, 1] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            className="absolute top-48 right-[10%] h-2 w-2 rounded-full bg-cyan-300/80 shadow-[0_0_28px_rgba(103,232,249,0.9)]"
+          />
+          <motion.div
+            animate={{ y: [0, -18, 0], scale: [1, 1.25, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            className="absolute bottom-28 left-[18%] h-2.5 w-2.5 rounded-full bg-purple-400/70 shadow-[0_0_26px_rgba(192,132,252,0.8)]"
+          />
+        </div>
+        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           
           {/* Release Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-indigo-400 mb-8 shadow-inner">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-indigo-400 mb-8 shadow-inner"
+          >
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-semibold">Version 2.4 Official Release</span>
             <span className="text-slate-600">|</span>
             <span className="text-slate-400 flex items-center gap-1">
               Live Edge Cloud <ArrowRight size={12} />
             </span>
-          </div>
+          </motion.div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 leading-[1.12]">
+          <motion.h1
+            initial={{ opacity: 0, y: 42, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.95, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 leading-[1.12]"
+          >
             Build Faster With Our <br />
-            <span className="bg-gradient-to-r from-indigo-400 via-sky-400 to-cyan-400 bg-clip-text text-transparent">
+            <motion.span
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+              style={{ backgroundSize: '200% 200%' }}
+              className="bg-gradient-to-r from-indigo-400 via-sky-300 to-cyan-400 bg-clip-text text-transparent"
+            >
               Modern Platform
-            </span>
-          </h1>
+            </motion.span>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 35, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
             The all-in-one developer workspace to build, scale, and manage your cloud-native applications effortlessly with unmatched latency and auto-scaling.
-          </p>
+          </motion.p>
 
           {/* Action CTA Group */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 35, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.72, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          >
+            <motion.div whileHover={{ y: -5, scale: 1.04 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
             <Link
               to="/signup"
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-xl shadow-indigo-600/30 transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
@@ -342,6 +436,8 @@ export default function Home() {
               <span>Start 14-Day Free Trial</span>
               <ArrowRight size={16} />
             </Link>
+            </motion.div>
+            <motion.div whileHover={{ y: -5, scale: 1.04 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
             <a
               href="#terminal"
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold transition-all flex items-center justify-center gap-2"
@@ -349,10 +445,18 @@ export default function Home() {
               <Terminal size={16} className="text-indigo-400" />
               <span>Try Interactive CLI</span>
             </a>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Product Code Mockup */}
-          <div className="relative mx-auto max-w-4xl rounded-2xl border border-slate-800 bg-slate-900/60 p-2.5 backdrop-blur-xl shadow-2xl shadow-indigo-950/40">
+          <motion.div
+            initial={{ opacity: 0, y: 70, rotateX: 12, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -5, borderColor: 'rgba(99, 102, 241, 0.6)' }}
+            style={{ transformPerspective: 1000 }}
+            className="relative mx-auto max-w-4xl rounded-2xl border border-slate-800 bg-slate-900/60 p-2.5 backdrop-blur-xl shadow-2xl shadow-indigo-950/40"
+          >
             <div className="rounded-xl border border-slate-800/80 bg-slate-950 p-5 sm:p-6 text-left">
               <div className="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-4">
                 <div className="flex items-center gap-2">
@@ -374,35 +478,46 @@ export default function Home() {
                 </code>
               </pre>
             </div>
-          </div>
+          </motion.div>
 
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 3. STATS BANNER ================= */}
-      <section className="py-12 border-y border-slate-800/80 bg-slate-900/40 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} className="py-12 border-y border-slate-800/80 bg-slate-900/40 relative z-10">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
+          <motion.div variants={cardReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -6, scale: 1.04 }} transition={{ duration: 0.35 }}>
             <p className="text-3xl sm:text-4xl font-black text-white">99.99%</p>
             <p className="text-xs text-slate-400 uppercase tracking-widest mt-1">Uptime SLA Guaranteed</p>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div variants={cardReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -6, scale: 1.04 }} transition={{ duration: 0.35 }}>
+
             <p className="text-3xl sm:text-4xl font-black text-indigo-400">&lt; 15ms</p>
             <p className="text-xs text-slate-400 uppercase tracking-widest mt-1">Global Edge Latency</p>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div variants={cardReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -6, scale: 1.04 }} transition={{ duration: 0.35 }}>
+
             <p className="text-3xl sm:text-4xl font-black text-sky-400">10M+</p>
             <p className="text-xs text-slate-400 uppercase tracking-widest mt-1">Daily API Requests</p>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div variants={cardReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -6, scale: 1.04 }} transition={{ duration: 0.35 }}>
+
             <p className="text-3xl sm:text-4xl font-black text-purple-400">50K+</p>
             <p className="text-xs text-slate-400 uppercase tracking-widest mt-1">Active Developers</p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 4. FEATURES SECTION ================= */}
-      <section id="features" className="py-24 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} id="features" className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">Features Matrix</span>
@@ -413,7 +528,15 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 hover:border-slate-700 transition-all hover:-translate-y-1">
+            <motion.div
+              variants={cardReveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -10, scale: 1.035, rotateX: 2, borderColor: 'rgba(99, 102, 241, 0.85)', boxShadow: '0 24px 80px rgba(79,70,229,0.18)' }}
+              className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8"
+            >
               <div className="w-12 h-12 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6">
                 <Zap size={24} />
               </div>
@@ -425,9 +548,17 @@ export default function Home() {
                 <li className="flex items-center gap-2"><Check size={14} className="text-emerald-400" /> Automatic HTTP/3 Protocol</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-emerald-400" /> Smart Edge Caching</li>
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 hover:border-slate-700 transition-all hover:-translate-y-1">
+            <motion.div
+              variants={cardReveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -10, scale: 1.035, rotateX: 2, borderColor: 'rgba(99, 102, 241, 0.85)', boxShadow: '0 24px 80px rgba(79,70,229,0.18)' }}
+              className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8"
+            >
               <div className="w-12 h-12 rounded-2xl bg-sky-600/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-6">
                 <Shield size={24} />
               </div>
@@ -439,9 +570,17 @@ export default function Home() {
                 <li className="flex items-center gap-2"><Check size={14} className="text-emerald-400" /> Zero-Trust Access Rules</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-emerald-400" /> Automated Web Application Firewall</li>
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 hover:border-slate-700 transition-all hover:-translate-y-1">
+            <motion.div
+              variants={cardReveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.27, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -10, scale: 1.035, rotateX: 2, borderColor: 'rgba(99, 102, 241, 0.85)', boxShadow: '0 24px 80px rgba(79,70,229,0.18)' }}
+              className="bg-slate-900/80 border border-slate-800 rounded-3xl p-8"
+            >
               <div className="w-12 h-12 rounded-2xl bg-purple-600/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6">
                 <BarChart3 size={24} />
               </div>
@@ -453,13 +592,17 @@ export default function Home() {
                 <li className="flex items-center gap-2"><Check size={14} className="text-emerald-400" /> Sub-second Alerting</li>
                 <li className="flex items-center gap-2"><Check size={14} className="text-emerald-400" /> OpenTelemetry Export Support</li>
               </ul>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 5. INTERACTIVE SOLUTIONS TAB ================= */}
-      <section id="solutions" className="py-20 border-t border-slate-800/60 bg-slate-900/30 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} id="solutions" className="py-20 border-t border-slate-800/60 bg-slate-900/30 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-sky-400">Architecture Solutions</span>
@@ -602,10 +745,14 @@ export default function Home() {
             )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 6. INTERACTIVE CLI TERMINAL SECTION ================= */}
-      <section id="terminal" className="py-24 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} id="terminal" className="py-24 relative z-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center max-w-xl mx-auto mb-10">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">Interactive Playground</span>
@@ -672,10 +819,14 @@ export default function Home() {
             </form>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 7. DYNAMIC PRICING SECTION ================= */}
-      <section id="pricing" className="py-24 border-t border-slate-800/60 bg-slate-900/20 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} id="pricing" className="py-24 border-t border-slate-800/60 bg-slate-900/20 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">Simple & Transparent</span>
@@ -796,17 +947,27 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 8. LIVE TESTIMONIALS CAROUSEL ================= */}
-      <section className="py-20 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} className="py-20 relative z-10">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-10">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">Wall of Love</span>
             <h2 className="text-3xl font-bold mt-2">Trusted By World Class Developers</h2>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 relative">
+          <motion.div
+            key={currentTestimonial}
+            initial={{ opacity: 0, y: 22, scale: 0.985, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 relative"
+          >
             <div className="flex items-center gap-1 text-amber-400 mb-6">
               {[...Array(TESTIMONIALS[currentTestimonial].rating)].map((_, i) => (
                 <Star key={i} size={16} fill="currentColor" />
@@ -858,12 +1019,16 @@ export default function Home() {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 9. INTERACTIVE FAQ ACCORDION ================= */}
-      <section id="faq" className="py-20 border-t border-slate-800/60 bg-slate-900/30 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} id="faq" className="py-20 border-t border-slate-800/60 bg-slate-900/30 relative z-10">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-sky-400">Got Questions?</span>
@@ -872,8 +1037,13 @@ export default function Home() {
 
           <div className="space-y-4">
             {FAQS.map((faq, idx) => (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.45, delay: idx * 0.06 }}
+                whileHover={{ borderColor: "rgba(99,102,241,0.55)", x: 3 }}
                 className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden transition-all"
               >
                 <button
@@ -888,19 +1058,34 @@ export default function Home() {
                     }`}
                   />
                 </button>
-                {openFaqIndex === idx && (
-                  <div className="p-5 pt-0 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+                <AnimatePresence initial={false}>
+                  {openFaqIndex === idx && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0, y: -8 }}
+                      animate={{ height: "auto", opacity: 1, y: 0 }}
+                      exit={{ height: 0, opacity: 0, y: -8 }}
+                      transition={{ duration: 0.28, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-5 pt-0 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 10. CONTACT FORM SECTION ================= */}
-      <section id="contact" className="py-24 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} id="contact" className="py-24 relative z-10">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 grid md:grid-cols-2 gap-8 items-center">
             
@@ -978,10 +1163,14 @@ export default function Home() {
 
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 11. NEWSLETTER & CTA BANNER ================= */}
-      <section className="py-20 px-6 relative z-10">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }} className="py-20 px-6 relative z-10">
         <div className="max-w-5xl mx-auto bg-gradient-to-r from-indigo-950/60 via-slate-900 to-indigo-950/60 border border-indigo-500/30 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Subscribe To Developer Updates</h2>
           <p className="text-slate-400 max-w-xl mx-auto text-xs sm:text-sm mb-8">
@@ -1011,7 +1200,7 @@ export default function Home() {
             </form>
           )}
         </div>
-      </section>
+      </motion.section>
 
       {/* ================= 12. FOOTER ================= */}
       <footer className="border-t border-slate-800/80 py-12 bg-slate-950 relative z-10 text-xs text-slate-500">
@@ -1066,6 +1255,6 @@ export default function Home() {
         </div>
       </footer>
 
-    </div>
+    </motion.div>
   )
 }
